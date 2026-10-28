@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Builds the Smart Money Pins static site. Run: python3 build.py"""
 import os, re, datetime
-BASE = os.environ.get("SITE_URL", "https://digitalprofitreview.com").rstrip("/")
+BASE = os.environ.get("SITE_URL", "https://morpheus1537.github.io/smartmoneypins").rstrip("/")
 PIN = "https://www.pinterest.com/smartmoneypinsco/"
 NAME = "Smart Money Pins"
 DISC = "Some posts may contain affiliate links. If you buy through them we may earn a small commission at no extra cost to you."
@@ -69,7 +69,7 @@ pages["printable-50-30-20.html"] = page("Free 50/30/20 Budget Printable", "A fre
 <h2>Needs (50%)</h2><table class="ws"><tr><th>Item</th><th>Amount</th></tr>{rows(8)}<tr><th>Total</th><td>$</td></tr></table>
 <h2>Wants (30%)</h2><table class="ws"><tr><th>Item</th><th>Amount</th></tr>{rows(7)}<tr><th>Total</th><td>$</td></tr></table>
 <h2>Savings &amp; Debt (20%)</h2><table class="ws"><tr><th>Item</th><th>Amount</th></tr>{rows(5)}<tr><th>Total</th><td>$</td></tr></table>
-<p>One change I'll make next month: ____________________________________________</p><p class="meta">smartmoneypins · digitalprofitreview.com</p></article>""", "printable-50-30-20.html")
+<p>One change I'll make next month: ____________________________________________</p><p class="meta">smartmoneypins · Smart Money Pins</p></article>""", "printable-50-30-20.html")
 
 for path, html in pages.items():
     open(path, "w").write(html)
@@ -78,4 +78,5 @@ open("sitemap.xml", "w").write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset 
  "".join(f"  <url><loc>{BASE}/{p.replace('index.html','')}</loc><lastmod>{today}</lastmod></url>\n" for p in pages) + "</urlset>\n")
 open("robots.txt", "w").write(f"User-agent: *\nAllow: /\nSitemap: {BASE}/sitemap.xml\n")
 open(".nojekyll", "w").write("")
-open("CNAME", "w").write("digitalprofitreview.com\n")
+CUSTOM_DOMAIN = None  # set "digitalprofitreview.com" (and SITE_URL) to switch back
+if CUSTOM_DOMAIN: open("CNAME", "w").write(CUSTOM_DOMAIN + "\n")
